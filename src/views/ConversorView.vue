@@ -1,4 +1,7 @@
 <template>
+   <div class="tituloB">
+    <h1>CONVERSOR</h1>
+   </div>
   <div>
     <main>
       <section>
@@ -22,7 +25,7 @@
 export default {
   data() {
     return {
-      dolar: 0, // Valor dinâmico obtido da API
+      dolar: 0, // valor da api
       usdValue: '1000.00',
       brlValue: ''
     };
@@ -76,7 +79,7 @@ export default {
           throw new Error(`Erro na requisição: ${response.status}`);
         }
         const data = await response.json();
-        this.dolar = parseFloat(data.USDBRL.bid); // Atualiza o valor do dólar com a cotação obtida
+        this.dolar = parseFloat(data.USDBRL.bid); // Atualiza sempre o valor
       } catch (error) {
         console.error('Erro ao buscar a cotação:', error);
       }
@@ -114,6 +117,22 @@ body {
 
 main {
   margin: 3rem;
+}
+
+h1 {
+    display: flex;
+    border-radius: 2rem;
+    margin: 2rem auto;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;   
+    align-items: center;           
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;                 
+    text-align: center;         
+    background: #4CAF50;        
+    color: white;                  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 main section {
