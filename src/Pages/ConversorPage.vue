@@ -1,57 +1,66 @@
 <template>
-   <div class="tituloB">
+  <div class="tituloB">
     <h1>CONVERSOR</h1>
-   </div>
+  </div>
   <div>
     <main>
       <section>
-        <span class="cur">US$</span>
-        <input id="usd" type="text" v-model="usdValue" @input="convert('usd-to-brl')" @blur="formatCurrency('usd')" />
+        <span class="cur">R$</span>
+        <input
+          id="brl"
+          type="text"
+          v-model="brlValue"
+          @input="convert('brl-to-usd')"
+          @blur="formatCurrency('brl')"
+        />
       </section>
       <section>
-        <span class="cur">R$</span>
-        <input id="brl" type="text" v-model="brlValue" @input="convert('brl-to-usd')" @blur="formatCurrency('brl')" />
+        <span class="cur">US$</span>
+        <input
+          id="usd"
+          type="text"
+          v-model="usdValue"
+          @input="convert('usd-to-brl')"
+          @blur="formatCurrency('usd')"
+        />
       </section>
     </main>
     <button @click="avisar">Clique aqui para receber novas atualizações!</button>
-    <footer>
-      Feito por Thiffany Montovani
-    </footer>
+    <footer>Feito por Thiffany Montovani</footer>
   </div>
 </template>
 
-  
 <script>
 export default {
-  data() {
+  data() { //função
     return {
       dolar: 0, // valor da api
-      usdValue: '1000.00',
+      usdValue: '1.00',
       brlValue: ''
     };
   },
-  mounted() {
-    this.fetchCotacao(); // Faz a requisição para obter a cotação ao montar o componente
-    this.convert('usd-to-brl'); // Faz a conversão inicial ao montar o componente
+  mounted() { //ciclo de vida do componente
+    this.fetchCotacao(); // chama para obter a cotação
+    this.convert('usd-to-brl'); // calcula a conversão
   },
   methods: {
     avisar() {
       alert("Notificações ativadas!");
     },
-    formatCurrency(type) {
+    formatCurrency(type) { //formata o valor
       if (type === 'usd') {
-        this.usdValue = this.formatNumber(this.usdValue);
+        this.usdValue = this.formatNumber (this.usdValue, 'en-US'); // as duas casa decimais formatnumber
       } else if (type === 'brl') {
-        this.brlValue = this.formatNumber(this.brlValue);
+        this.brlValue = this.formatNumber(this.brlValue, 'pt-BR');
       }
     },
-    formatNumber(value) {
-      let fixedValue = this.fixValue(value);
+    formatNumber(value, locale) {
+      let fixedValue = this.fixValue(value); //troca , por .
       let options = {
-        useGrouping: false,
-        minimumFractionDigits: 2
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
       };
-      return new Intl.NumberFormat("pt-BR", options).format(fixedValue);
+      return new Intl.NumberFormat(locale, options).format(fixedValue);
     },
     fixValue(value) {
       let fixedValue = value.replace(",", ".");
@@ -62,17 +71,15 @@ export default {
       if (type === "usd-to-brl") {
         let fixedValue = this.fixValue(this.usdValue);
         let result = fixedValue * this.dolar;
-        this.brlValue = this.formatNumber(result.toFixed(2));
-      }
-
-      if (type === "brl-to-usd") {
+        this.brlValue = this.formatNumber(result.toFixed(2), 'pt-BR');
+      } else if (type === "brl-to-usd") {
         let fixedValue = this.fixValue(this.brlValue);
         let result = fixedValue / this.dolar;
-        this.usdValue = this.formatNumber(result.toFixed(2));
+        this.usdValue = this.formatNumber(result.toFixed(2), 'en-US');
       }
     },
     async fetchCotacao() {
-      const url = 'https://economia.awesomeapi.com.br/json/last/USD-BRL'; // API para obter a cotação USD-BRL
+      const url = 'https://economia.awesomeapi.com.br/json/last/USD-BRL'; // API para obter a cotação USD-BRL vi no gg
       try {
         const response = await fetch(url);
         if (!response.ok) {

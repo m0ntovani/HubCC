@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "CalculadoraB",
+  name: "CalculadoraPage",
   data() {
     return {
       num1: 0,

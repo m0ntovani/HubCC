@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "CalculadoraView",
+  name: "Calculadora",
   data() {
     return {
       num1: 0,
