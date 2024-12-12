@@ -1,3 +1,20 @@
+<template>
+   <div class="titulo">
+    <h1>CALCULADORA</h1>
+   </div>
+  <div class="inputs"> <!-- dois inputs para as variaveis reativas -->
+    <input type="number" v-model="num1" placeholder="Número 1" />
+     <input type="number" v-model="num2" placeholder="Número 2" />
+ </div>
+        <div class="botoes"> <!-- Quatro botoes usando o evento click para calcular -->
+          <button @click="calcular('+')">+</button>
+         <button @click="calcular('-')">-</button>
+          <button @click="calcular('*')">*</button>
+         <button @click="calcular('/')">/</button>
+        </div>
+     <div class="resultado"> Seu resultado: {{ resultado }} </div>
+</template>
+
 <script>
 export default {
   name: "Calculadora",
@@ -33,23 +50,6 @@ export default {
   }
 };
 </script>
-
-<template>
-   <div class="titulo">
-    <h1>CALCULADORA</h1>
-   </div>
-  <div class="inputs"> <!-- dois inputs para as variaveis reativas -->
-    <input type="number" v-model="num1" placeholder="Número 1" />
-     <input type="number" v-model="num2" placeholder="Número 2" />
- </div>
-        <div class="botoes"> <!-- Quatro botoes usando o evento click para calcular -->
-          <button @click="calcular('+')">+</button>
-         <button @click="calcular('-')">-</button>
-          <button @click="calcular('*')">*</button>
-         <button @click="calcular('/')">/</button>
-        </div>
-     <div class="resultado"> Seu resultado: {{ resultado }} </div>
-</template>
 
 <style scoped>
 * {
