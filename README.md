@@ -15,6 +15,8 @@ Essas páginas estão configuradas para serem acessadas e interagir entre si de 
 - 📱 **Responsividade**: Implementação do Tailwind CSS para garantir que o layout seja adaptável a diferentes dispositivos.  
 - 🔄 **Interatividade Aprimorada**: Melhorias na usabilidade e interações entre os componentes das páginas.
 
+### link : https://calc-conversor.vercel.app/calculadora
+
 ## 👩🏽‍💻 Com Amor e Código, Thiffany Montovani.
 
  
